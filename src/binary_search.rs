@@ -14,21 +14,16 @@ impl BinarySearch {
             return -1;
         }
         let mut low = 0;
-        let mut high = (self.sorted_array.len() - 1);
+        let mut high = self.sorted_array.len() - 1;
         let mut mid = high / 2;
-        loop {
+        while low <= high {
             mid = low + (high - low) / 2;
             if self.sorted_array[mid] > target {
                 high = mid - 1;
-            }
-            if self.sorted_array[mid] < target {
+            } else if self.sorted_array[mid] < target {
                 low = mid + 1;
-            }
-            if self.sorted_array[mid] == target {
+            } else {
                 return mid as i64;
-            }
-            if high == low && self.sorted_array[high] != target {
-                break;
             }
         }
         -1
