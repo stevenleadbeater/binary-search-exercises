@@ -10,19 +10,24 @@ impl BinarySearch {
     }
 
     fn search(&self, target: i64) -> i64 {
-        let mut local_array = self.sorted_array.clone();
-        let mut basis = 0;
+        if self.sorted_array.len() == 0 {
+            return -1;
+        }
+        let mut low = 0;
+        let mut high = (self.sorted_array.len() - 1);
+        let mut mid = high / 2;
         loop {
-            let index = (local_array.len() / 2);
-            if local_array[index] == target {
-                return (basis + index) as i64;
-            } else if local_array[index] > target {
-                local_array = local_array.split_at(index).0.to_vec();
-            } else if local_array[index] < target {
-                local_array = local_array.split_at(index).1.to_vec();
-                basis += index;
+            mid = low + (high - low) / 2;
+            if self.sorted_array[mid] > target {
+                high = mid - 1;
             }
-            if local_array.len() == 1 && local_array[0] != target {
+            if self.sorted_array[mid] < target {
+                low = mid + 1;
+            }
+            if self.sorted_array[mid] == target {
+                return mid as i64;
+            }
+            if high == low && self.sorted_array[high] != target {
                 break;
             }
         }
