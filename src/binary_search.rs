@@ -17,7 +17,7 @@ impl BinarySearch {
         let mut high = self.sorted_array.len() - 1;
         let mut mid = high / 2;
         while low <= high {
-            mid = low + (high - low) / 2;
+            mid = low + ((high - low) / 2);
             if self.sorted_array[mid] > target {
                 high = mid - 1;
             } else if self.sorted_array[mid] < target {
